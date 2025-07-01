@@ -82,8 +82,10 @@ int main() {
 		BFS();
 
 		// parent 배열 채우기
-		for (int x = 1; x <= n; x++) {
-			for (int i = 1; i < 20; i++) {
+		// 순서 주의!!!!!!!!!!!!
+		// 안쪽 for가 정점 번호여야 함!!!!!
+		for (int i = 1; i < 20; i++) {
+			for (int x = 1; x <= n; x++) {
 				parent[x][i] = parent[parent[x][i - 1]][i - 1];
 			}
 		}
