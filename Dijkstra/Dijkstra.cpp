@@ -4,7 +4,7 @@
 using namespace std;
 #define endl '\n'
 
-#define V_SZ 20'001
+#define V_SZ 20'0010
 
 struct Cmp {
 	// second가 가장 작은 정점을 먼저 꺼내야 함
@@ -25,24 +25,27 @@ int dist[V_SZ];
 // Container: 실제로 저장하는 자료구조 (vector<T> 꼴이 일반적)
 
 void Dijkstra() {
-	while (!pq.empty()) {
-		// st는 고정이니까 생각할 필요 X
-		
-		// now.first: 노드 번호
-		// now.second: st부터 이 노드까지의 거리
-		pair<int, int> now = pq.top(); pq.pop();
+	while (!pq.empty()) {		
+		pair<int, int> tmp = pq.top(); pq.pop();
 
+		// st -> now
+		int now_node = tmp.first;
+		int now_dist = tmp.second;
+		
 		// now가 예전 정보면 버려
 		// dist에 이미 더 짧은 거리를 구해서 넣어뒀음
-		if (now.second > dist[now.first])
+		if (now_dist > dist[now_node])
 			continue;
 
 		// now의 이웃들 거리 갱신
 		// st -> nxt 와 st -> now -> nxt 거리 비교
-		for (pair<int, int> nxt : graph[now.first]) {
-			if (dist[nxt.first] > dist[now.first] + nxt.second) {
-				dist[nxt.first] = dist[now.first] + nxt.second;
-				pq.push({ nxt.first, dist[nxt.first] });
+		for (pair<int, int> nxt : graph[now_node]) {
+			int nxt_node = nxt.first;
+			int nxt_dist = nxt.second;
+
+			if (dist[nxt_node] > dist[now_node] + nxt_dist) {
+				dist[nxt_node] = dist[now_node] + nxt_dist;
+				pq.push({ nxt_node, dist[nxt_dist] });
 			}
 		}
 	}
