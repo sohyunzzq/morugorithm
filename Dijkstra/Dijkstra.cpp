@@ -4,7 +4,7 @@
 using namespace std;
 #define endl '\n'
 
-#define V_SZ 20'0010
+#define V_SZ 20'001
 
 struct Cmp {
 	// second가 가장 작은 정점을 먼저 꺼내야 함
